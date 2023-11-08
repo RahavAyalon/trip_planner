@@ -1,0 +1,25 @@
+[tool.poetry]
+name = "smart_trip_planner"
+version = "1.0.0"
+description = "A basic LLM-based travel planner app, with prompt injection guardrails"
+authors = ["Rahav Ayalon <Rahav.Ayalon@outlook.com>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = ">=3.11,<3.12"
+fastapi = "^0.104.1"
+uvicorn = "^0.24.0.post1"
+azure-functions = "^1.17.0"
+pydantic-settings = "^2.0.3"
+llm-guard = "^0.3.12"
+requests = "^2.31.0"
+openai = "^1.27.0"
+
+[tool.poetry.group.dev.dependencies]
+black = "^23.3.0"
+pytest = "^7.4.0"
+httpx = "^0.24.1"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
