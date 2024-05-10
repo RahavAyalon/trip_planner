@@ -14,7 +14,7 @@ function App({session_id}: {session_id: string}) {
 
     const sendMessage = (inputMessage: string) => {
         const msg: ChatRequest = {
-            input_message: inputMessage,
+            prompt: inputMessage,
             session_id: session_id
         }
         dispatch(sendMessageAsync(msg));
@@ -59,7 +59,7 @@ function App({session_id}: {session_id: string}) {
 
             </main>
             <footer className="App-footer">
-                Powered by Dofinity
+                Powered by Rahav Ayalon
             </footer>
         </div>
     );

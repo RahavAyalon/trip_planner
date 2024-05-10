@@ -4,7 +4,7 @@ import {RootState} from "../../core/store";
 
 
 export interface ChatRequest {
-    input_message: string;
+    prompt: string;
     session_id: string;
 }
 
@@ -74,12 +74,11 @@ export const chatSlice = createSlice({
             })
             .addCase(sendMessageAsync.fulfilled, (state, action) => {
                 state.status = "idle";
-                const {message, debug_info} = action.payload
+                const {content} = action.payload
                 state.chatHistory.push({
                     speaker: 'AI',
-                    message: message
+                    message: content
                 });
-                state.debugInfo = debug_info;
             })
             .addCase(resetChatAsync.pending, (state, action) => {
                 state.status = "loading";
