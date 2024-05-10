@@ -34,6 +34,7 @@ def plan_trip_controller(prompt):
         return json.loads(cached_response)
 
     tool_calls = response.choices[0].message.tool_calls
+
     if tool_calls:
         for tool_call in tool_calls:
             function_args = json.loads(tool_call.function.arguments)
@@ -42,7 +43,7 @@ def plan_trip_controller(prompt):
                                      duration=function_args.get("duration")) is False:
 
                 set_response_in_cache(cache_key, json.dumps({"error": "Invalid input"}))
-                return json.dumps({"error": "Invalid input"})
+                return {"content": "Invalid input"}
             else:
                 function_response = json.dumps({
                     "location": function_args.get("location"),
@@ -64,3 +65,4 @@ def plan_trip_controller(prompt):
 
         set_response_in_cache(cache_key, json.dumps(enriched_response.choices[0].message.model_dump()))
         return enriched_response.choices[0].message.model_dump()
+    return {"content": response.choices[0].message.content} # lacking info
