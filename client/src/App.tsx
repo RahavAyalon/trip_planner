@@ -7,8 +7,9 @@ import { useAppDispatch } from "./core/hooks";
 import TextAreaElement from "./components/textarea";
 import ChatBox from './components/ChatBox';
 import History from './components/History';
-import {sendMessageAsync, addUserMessage, resetChatAsync} from "./features/chat/chatSlice";
-import { Link as RouterLink } from 'react-router-dom'; // Import RouterLink
+import {sendMessageAsync, addUserMessage, resetChatAsync, getHistoryAsync} from "./features/chat/chatSlice";
+import { Link as RouterLink } from 'react-router-dom';
+import {getHistory} from "./features/chat/chatAPI"; // Import RouterLink
 
 function App({ session_id }: { session_id: string }) {
     const dispatch = useAppDispatch();
@@ -30,7 +31,11 @@ function App({ session_id }: { session_id: string }) {
                         <Button component={RouterLink} to="/" style={{ marginRight: 20, color: 'white', border: '1px solid #cfcfcf' }}>
                             Chat
                         </Button>
-                        <Button component={RouterLink} to="/recenttrips" style={{ color: 'white', border: '1px solid #cfcfcf' }}>
+                        <Button component={RouterLink} to="/recenttrips" style={{ color: 'white', border: '1px solid #cfcfcf' }}
+                        onClick={() => {
+                            dispatch(getHistoryAsync())
+                        }}
+                        >
                             Recent Trips
                         </Button>
                     </nav>

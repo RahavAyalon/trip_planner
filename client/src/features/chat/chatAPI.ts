@@ -8,6 +8,11 @@ export function sendMessage(chatRequest: ChatRequest) {
     );
 }
 
+export function getHistory() {
+    return connector.get(
+        `${process.env.REACT_APP_BASE_URL}/api/trips/history`,
+    );
+}
 export function resetChat(session_id: string) {
     return connector.post(
         `${process.env.REACT_APP_BASE_URL}/api/trips/reset`,

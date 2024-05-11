@@ -13,8 +13,34 @@ client = openai.OpenAI(
 )
 
 
+def load_history(file_path):
+    if os.path.exists(file_path):
+        with open(file_path, 'r') as file:
+            return json.load(file)
+    else:
+        return []
+
+def save_history(file_path, history):
+    with open(file_path, 'w') as file:
+        json.dump(history, file)
+
+
+def update_history(prompt, response, file_path='chat_history.json'):
+    # Load existing history from JSON file
+    history = load_history(file_path)
+
+    # Append new interaction and ensure history does not exceed five entries
+    new_interaction = {"request": prompt, "plan": response.choices[0].message.content}
+    history.append(new_interaction)
+    if len(history) > 5:
+        history.pop(0)  # Remove the oldest interaction
+
+    # Save updated history back to JSON file
+    save_history(file_path, history)
+
 def plan_trip_controller(prompt):
     if not validate_prompt_injection(prompt):
+        # TODO should be saved in history?
         raise HTTPException(status_code=403, detail="Prompt injection attempt detected")
 
     messages = [
@@ -26,15 +52,15 @@ def plan_trip_controller(prompt):
         model=os.getenv("OPENAI_MODEL"),
         messages=messages,
         tools=tools,
-        tool_choice="auto",
+        tool_choice="required",
     )
     cache_key = prompt # TODO
     cached_response = get_cached_response(cache_key)
     if cached_response:
+        update_history(prompt, response)
         return json.loads(cached_response)
 
     tool_calls = response.choices[0].message.tool_calls
-
     if tool_calls:
         for tool_call in tool_calls:
             function_args = json.loads(tool_call.function.arguments)
@@ -43,6 +69,7 @@ def plan_trip_controller(prompt):
                                      duration=function_args.get("duration")) is False:
 
                 set_response_in_cache(cache_key, json.dumps({"error": "Invalid input"}))
+                update_history(prompt, response)
                 return {"content": "Invalid input"}
             else:
                 function_response = json.dumps({
@@ -64,5 +91,6 @@ def plan_trip_controller(prompt):
         )
 
         set_response_in_cache(cache_key, json.dumps(enriched_response.choices[0].message.model_dump()))
+        update_history(prompt, enriched_response)
         return enriched_response.choices[0].message.model_dump()
     return {"content": response.choices[0].message.content} # lacking info
