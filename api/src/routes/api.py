@@ -1,6 +1,6 @@
 from fastapi import APIRouter
 
-from api.src.routes import ping, trips
+from src.routes import ping, trips
 
 api_router = APIRouter()
 

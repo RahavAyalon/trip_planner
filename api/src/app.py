@@ -3,11 +3,14 @@ from fastapi.middleware.cors import CORSMiddleware
 import os
 
 # TODO remove first api... in all imports in the code
-from api.src.routes.api import api_router
+from src.routes.api import api_router
+
 
 origins = [
     "http://localhost",
     "http://localhost:3000",
+    "http://localhost:3001",
+
 ]
 
 
