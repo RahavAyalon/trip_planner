@@ -1,67 +1,80 @@
 import './App.css';
-import {Box, Button, Stack} from "@mui/material";
+import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
+import { Box, Button, Stack } from "@mui/material";
 import SendIcon from '@mui/icons-material/Send';
-import {ChatRequest, sendMessageAsync, addUserMessage, resetChatAsync} from "./features/chat/chatSlice";
-import {useAppDispatch} from "./core/hooks";
+import RestartAltIcon from '@mui/icons-material/RestartAlt';
+import { useAppDispatch } from "./core/hooks";
 import TextAreaElement from "./components/textarea";
 import ChatBox from './components/ChatBox';
-import RestartAltIcon from '@mui/icons-material/RestartAlt';
+import History from './components/History';
+import {sendMessageAsync, addUserMessage, resetChatAsync} from "./features/chat/chatSlice";
+import { Link as RouterLink } from 'react-router-dom'; // Import RouterLink
 
-function App({session_id}: {session_id: string}) {
-
+function App({ session_id }: { session_id: string }) {
     const dispatch = useAppDispatch();
-    let msg = ''
+    let msg = '';
 
     const sendMessage = (inputMessage: string) => {
-        const msg: ChatRequest = {
+        const msg = {
             prompt: inputMessage,
-            session_id: session_id
-        }
+            session_id
+        };
         dispatch(sendMessageAsync(msg));
     };
 
     return (
-        <div className="App">
-            <header className="App-header">
-
-            </header>
-            <main className="App-main">
-                <Box sx={{width: '90%'}} className="chat-box">
-                    <ChatBox />
-                </Box>
-
-                <Box sx={{width: '100%'}} className="chat-controls">
-                    <Stack direction="row" spacing={2} className="controlsWrapper">
-
-                        <TextAreaElement onChange={(e:any) => msg = e.target.value}/>
-                        <Button variant="contained"
-                                endIcon={<SendIcon sx={{transform: 'scaleX(-1)', marginRight: '15px'}}/>}
-                                sx={{maxHeight: '35px', margin: 'auto 25px auto 10px !important'}}
-                                onClick={(e: any) => {
-                                    if (msg) {
-                                        dispatch(addUserMessage(msg));
-                                        sendMessage(msg);
-                                    }
-                                }}
-                        >
-                            send
+        <Router>
+            <div className="App">
+                <header className="App-header">
+                    <nav>
+                        <Button component={RouterLink} to="/" style={{ marginRight: 20, color: 'white', border: '1px solid #cfcfcf' }}>
+                            Chat
                         </Button>
-                        <Button variant="outlined" endIcon={<RestartAltIcon sx={{transform: 'scaleX(-1)', marginRight: '15px'}} />}
-                        sx={{color: 'white', direction: 'rtl', border: '1px solid #cfcfcf'}}
-                        onClick={(e: any) => {
-                            dispatch(resetChatAsync(session_id))
-                        }}
-                        >
-                            reset
+                        <Button component={RouterLink} to="/recenttrips" style={{ color: 'white', border: '1px solid #cfcfcf' }}>
+                            Recent Trips
                         </Button>
-                    </Stack>
-                </Box>
-
-            </main>
-            <footer className="App-footer">
-                Powered by Rahav Ayalon
-            </footer>
-        </div>
+                    </nav>
+                </header>
+                <main className="App-main">
+                    <Routes>
+                        <Route path="/" element={
+                            <Box sx={{ width: '100%' }}>
+                                <Box sx={{ width: '100%' }} className="chat-box">
+                                    <ChatBox />
+                                </Box>
+                                <Box sx={{ width: '100%' }} className="chat-controls">
+                                    <Stack direction="row" spacing={2} className="controlsWrapper">
+                                        <TextAreaElement onChange={(e: any) => msg = e.target.value} />
+                                        <Button variant="outlined" endIcon={<SendIcon sx={{  marginLeft: '15px' }} />} sx={{  color: 'white', border: '1px solid #cfcfcf' }}
+                                            onClick={() => {
+                                                if (msg) {
+                                                    dispatch(addUserMessage(msg));
+                                                    sendMessage(msg);
+                                                }
+                                            }}
+                                        >
+                                            Send
+                                        </Button>
+                                        <Button variant="outlined" endIcon={<RestartAltIcon sx={{ transform: 'scaleX(-1)', marginLeft: '15px' }} />}
+                                            sx={{ color: 'white', border: '1px solid #cfcfcf' }}
+                                            onClick={() => {
+                                                dispatch(resetChatAsync(session_id))
+                                            }}
+                                        >
+                                            Reset
+                                        </Button>
+                                    </Stack>
+                                </Box>
+                            </Box>
+                        } />
+                        <Route path="/recenttrips" element={<History/>} />
+                    </Routes>
+                </main>
+                <footer className="App-footer">
+                    Powered by Rahav Ayalon
+                </footer>
+            </div>
+        </Router>
     );
 }
 

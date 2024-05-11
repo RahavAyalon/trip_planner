@@ -15,7 +15,7 @@
 
 .App-main {
   background-color: #282c34;
-  min-height: 100vh;
+  min-height: 75vh;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -23,6 +23,19 @@
   font-size: calc(10px + 2vmin);
   color: white;
 }
+
+
+.App-header {
+    background-color: #282c34;  /* Dark background */
+    color: white !important;               /* White text color */
+    display: flex;              /* Uses flexbox for layout */
+    align-items: center;        /* Centers content vertically */
+    justify-content: center;    /* Centers content horizontally */
+    padding-top: 20px;          /* Padding at the top, adjusted for header */
+    padding-bottom: 20px;       /* Padding at the bottom, same as footer */
+    font-size: 14px;            /* Slightly larger font size for header */
+}
+
 
 .App-footer {
     background-color: #282c34;

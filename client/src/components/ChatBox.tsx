@@ -20,14 +20,14 @@ const ChatBox = () => {
                 width: '100%',
                 maxWidth: '100%',
                 bgcolor: 'background.paper',
-                textAlign: 'right'
+                textAlign: 'left'
             }}>
 
                 {
                     chatHistory.map((msg: any, index: number) => {
                         return <ListItem key={index}
                                          sx={{
-                                             textAlign: 'right',
+                                             textAlign: 'left',
                                              alignItems: 'flex-start',
                                          }} className={(index % 2 === 0) ? 'even' : 'odd'}>
                             <ListItemAvatar>

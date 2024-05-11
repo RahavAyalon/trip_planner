@@ -10,7 +10,7 @@ export function sendMessage(chatRequest: ChatRequest) {
 
 export function resetChat(session_id: string) {
     return connector.post(
-        `${process.env.REACT_APP_BASE_URL}/api/chat/reset`,
+        `${process.env.REACT_APP_BASE_URL}/api/trips/reset`,
         {session_id: session_id}
     );
 }
