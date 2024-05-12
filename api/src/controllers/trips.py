@@ -52,7 +52,7 @@ def plan_trip_controller(prompt):
         model=os.getenv("OPENAI_MODEL"),
         messages=messages,
         tools=tools,
-        tool_choice="required",
+        tool_choice="auto",
     )
     cache_key = prompt # TODO
     cached_response = get_cached_response(cache_key)
@@ -68,9 +68,9 @@ def plan_trip_controller(prompt):
                                      budget=function_args.get("budget"),
                                      duration=function_args.get("duration")) is False:
 
-                set_response_in_cache(cache_key, json.dumps({"error": "Invalid input"}))
+                set_response_in_cache(cache_key, json.dumps({"error": response}))
                 update_history(prompt, response)
-                return {"content": "Invalid input"}
+                return {"content": response}
             else:
                 function_response = json.dumps({
                     "location": function_args.get("location"),
