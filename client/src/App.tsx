@@ -63,7 +63,7 @@ function App({ session_id }: { session_id: string }) {
                                         <Button variant="outlined" endIcon={<RestartAltIcon sx={{ transform: 'scaleX(-1)', marginLeft: '15px' }} />}
                                             sx={{ color: 'white', border: '1px solid #cfcfcf' }}
                                             onClick={() => {
-                                                dispatch(resetChatAsync(session_id))
+                                                window.location.reload();
                                             }}
                                         >
                                             Reset
