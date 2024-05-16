@@ -3,6 +3,7 @@ from ..utils.history import update_history
 from ..utils.validator import validate_prompt_input, validate_prompt_injection
 from ..utils.context import context
 from ..utils.tools import tools
+from src.utils.logger import logger
 
 from dotenv import load_dotenv
 import openai
@@ -17,7 +18,9 @@ client = openai.OpenAI(
 
 
 def plan_trip_controller(prompt):
+    logger.info(prompt)
     if not validate_prompt_injection(prompt):
+        logger.warning("Prompt injection attempt detected for prompt: " + prompt)
         return {"error": "Prompt injection attempt detected", "status_code": 403}
 
     messages = [
@@ -31,6 +34,7 @@ def plan_trip_controller(prompt):
         tools=tools,
         tool_choice="auto",
     )
+    logger.info(str(response.choices))
     cache_key = prompt # TODO
     cached_response = get_cached_response(cache_key)
     if cached_response:
@@ -40,14 +44,9 @@ def plan_trip_controller(prompt):
     if tool_calls:
         for tool_call in tool_calls:
             function_args = json.loads(tool_call.function.arguments)
-            if not validate_prompt_input(location=function_args.get("location"),
+            if validate_prompt_input(location=function_args.get("location"),
                                      budget=function_args.get("budget"),
                                      duration=function_args.get("duration")):
-
-                set_response_in_cache(cache_key, json.dumps({"error": response}))
-                update_history(prompt, response)
-                return {"content": response}
-            else:
                 function_response = json.dumps({
                     "location": function_args.get("location"),
                     "budget": function_args.get("budget"),
@@ -65,7 +64,7 @@ def plan_trip_controller(prompt):
             model=os.getenv("OPENAI_MODEL"),
             messages=messages,
         )
-
+        logger.info(str(enriched_response))
         set_response_in_cache(cache_key, json.dumps(enriched_response.choices[0].message.model_dump()))
         update_history(prompt, enriched_response)
         return enriched_response.choices[0].message.model_dump()
