@@ -14,7 +14,7 @@ const ChatBox = () => {
             borderRadius: '10px',
             m: 2,
             color: 'white',
-            border: '1px solid white', // Adding a white border to the Stack
+            border: '1px solid white',
         }}>
             <List sx={{
                 width: '100%',

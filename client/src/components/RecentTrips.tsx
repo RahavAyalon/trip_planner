@@ -8,7 +8,7 @@ interface TripMessage {
     plan: string;
 }
 
-function History() {
+function RecentTrips() {
     const trips = useSelector((state: RootState) => state.data.history as TripMessage[]);
     const tableStyle = {
         background: '#212121',
@@ -43,4 +43,4 @@ function History() {
     );
 }
 
-export default History;
+export default RecentTrips;
