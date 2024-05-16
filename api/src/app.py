@@ -15,8 +15,8 @@ origins = [
 
 
 app: FastAPI = FastAPI(
-    title="Dofinity's AI project",  # TODO
-    description="",  # TODO
+    title="Trip Planner API",
+    description="",
     openapi_url=f"/api/openapi.json",
     version="0.0.0"
 )

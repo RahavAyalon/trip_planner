@@ -14,7 +14,7 @@
 }
 
 .App-main {
-  background-color: #282c34;
+  background-color: #212121;
   min-height: 75vh;
   display: flex;
   flex-direction: column;
@@ -22,11 +22,13 @@
   justify-content: center;
   font-size: calc(10px + 2vmin);
   color: white;
+  padding-right: 20px;
+  padding-left: 20px;
 }
 
 
 .App-header {
-    background-color: #282c34;  /* Dark background */
+    background-color: #212121;  /* Dark background */
     color: white !important;               /* White text color */
     display: flex;              /* Uses flexbox for layout */
     align-items: center;        /* Centers content vertically */
@@ -38,7 +40,7 @@
 
 
 .App-footer {
-    background-color: #282c34;
+    background-color: #212121;
     color: white;
     display: flex;
     align-items: center;
@@ -68,7 +70,8 @@
 }
 
 .MuiListItem-root.odd {
-    background-color: #eeeeee
+    background-color: #212121;
+
 }
 
 

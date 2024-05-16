@@ -28,7 +28,7 @@ function App({ session_id }: { session_id: string }) {
             <div className="App">
                 <header className="App-header">
                     <nav>
-                        <Button component={RouterLink} to="/" style={{ marginRight: 20, color: 'white', border: '1px solid #cfcfcf' }}>
+                        <Button component={RouterLink} to="/newtrip" style={{ marginRight: 20, color: 'white', border: '1px solid #cfcfcf' }}>
                             Chat
                         </Button>
                         <Button component={RouterLink} to="/recenttrips" style={{ color: 'white', border: '1px solid #cfcfcf' }}
@@ -42,7 +42,7 @@ function App({ session_id }: { session_id: string }) {
                 </header>
                 <main className="App-main">
                     <Routes>
-                        <Route path="/" element={
+                        <Route path="/newtrip" element={
                             <Box sx={{ width: '100%' }}>
                                 <Box sx={{ width: '100%' }} className="chat-box">
                                     <ChatBox />
