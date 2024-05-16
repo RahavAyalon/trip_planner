@@ -1,13 +1,13 @@
 import logging
 
-logger = logging.getLogger('my_logger')
-logger.setLevel(logging.DEBUG)  # Set the minimum log level
+logger = logging.getLogger('trip_planner_logger')
+logger.setLevel(logging.DEBUG)  #
 
-console_handler = logging.StreamHandler()  # Log messages to the console
-file_handler = logging.FileHandler('app.log')  # Log messages to a file
+console_handler = logging.StreamHandler()
+file_handler = logging.FileHandler('app.log')
 
-console_handler.setLevel(logging.DEBUG)  # Only log warnings and above to console
-file_handler.setLevel(logging.DEBUG)  # Log all debug and above messages to the file
+console_handler.setLevel(logging.DEBUG)
+file_handler.setLevel(logging.DEBUG)
 
 console_format = logging.Formatter('%(name)s - %(levelname)s - %(message)s')
 file_format = logging.Formatter('%(asctime)s - %(name)s - %(levelname)s - %(message)s')
