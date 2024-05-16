@@ -67,9 +67,9 @@ def plan_trip_controller(prompt):
     if tool_calls:
         for tool_call in tool_calls:
             function_args = json.loads(tool_call.function.arguments)
-            if validate_prompt_input(location=function_args.get("location"),
+            if not validate_prompt_input(location=function_args.get("location"),
                                      budget=function_args.get("budget"),
-                                     duration=function_args.get("duration")) is False:
+                                     duration=function_args.get("duration")):
 
                 set_response_in_cache(cache_key, json.dumps({"error": response}))
                 update_history(prompt, response)
