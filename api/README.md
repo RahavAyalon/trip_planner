@@ -1,16 +1,8 @@
-## AI TRIP PLANNER ##
-
-### Overview ###
-
-Trip Planner is a LLM-based travel planner app, with prompt engineering guardrails.
-The app receives a natural language request to plan a specific trip, makes sure it’s valid and safe and returns an up to
-3 lines of trip plan in natural language.
-
 ### Get Started ###
 
 #### Prerequisites ####
 - pip
-- python ?????????????
+- **python version between 3.9 and 3.11**
 
 #### Setup ####
 1. Install venv, if not installed already:
@@ -18,6 +10,7 @@ The app receives a natural language request to plan a specific trip, makes sure 
 sudo apt install python3.10-venv
 ```
 2 
+
 2. Install Redis (in memory cache for user queries and LLM responses)
 ```bash
 sudo apt install lsb-release curl gpg

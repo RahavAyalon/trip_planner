@@ -60,7 +60,6 @@ def plan_trip_controller(prompt):
     cache_key = prompt # TODO
     cached_response = get_cached_response(cache_key)
     if cached_response:
-        # update_history(prompt, response)
         return json.loads(cached_response)
 
     tool_calls = response.choices[0].message.tool_calls
