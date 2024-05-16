@@ -1,9 +1,9 @@
 from ..utils.cache import get_cached_response, set_response_in_cache
+from ..utils.history import update_history
 from ..utils.validator import validate_prompt_input, validate_prompt_injection
 from ..utils.context import context
 from ..utils.tools import tools
 
-from fastapi import HTTPException
 from dotenv import load_dotenv
 import openai
 import json
@@ -16,35 +16,9 @@ client = openai.OpenAI(
 )
 
 
-def load_history(file_path):
-    if os.path.exists(file_path):
-        with open(file_path, 'r') as file:
-            return json.load(file)
-    else:
-        return []
-
-def save_history(file_path, history):
-    with open(file_path, 'w') as file:
-        json.dump(history, file)
-
-
-def update_history(prompt, response, file_path='chat_history.json'):
-    # Load existing history from JSON file
-    history = load_history(file_path)
-
-    # Append new interaction and ensure history does not exceed five entries
-    new_interaction = {"request": prompt, "plan": response.choices[0].message.content}
-    history.append(new_interaction)
-    if len(history) > 5:
-        history.pop(0)  # Remove the oldest interaction
-
-    # Save updated history back to JSON file
-    save_history(file_path, history)
-
 def plan_trip_controller(prompt):
     if not validate_prompt_injection(prompt):
-        # TODO should be saved in history?
-        raise HTTPException(status_code=403, detail="Prompt injection attempt detected")
+        return {"error": "Prompt injection attempt detected", "status_code": 403}
 
     messages = [
         {"role": "system", "content": context},
