@@ -12,14 +12,15 @@ export interface ChatMessage {
     message: string;
 }
 
-export interface ChatInteraction {
+// New interface for the trip history
+export interface TripMessage {
     request: string;
     plan: string;
 }
 
 export interface ChatState {
     chatHistory: ChatMessage[];
-    history: ChatInteraction[];
+    history: TripMessage[]; // Now using TripMessage for history
     sessionId: string;
     debugInfo: any;
     status: "idle" | "loading" | "failed";
@@ -109,11 +110,12 @@ export const chatSlice = createSlice({
             })
             .addCase(resetChatAsync.fulfilled, (state) => {
                 state.chatHistory = [];
-                state.history = [];
+                state.history = []; // Reset history on chat reset
                 state.debugInfo = {};
                 state.status = "idle";
             })
             .addCase(getHistoryAsync.fulfilled, (state, action) => {
+                // Ensure the payload structure matches TripMessage
                 state.history = action.payload.map((item: any) => ({
                     request: item.request,
                     plan: item.plan
