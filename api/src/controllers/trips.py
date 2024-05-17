@@ -35,7 +35,7 @@ def plan_trip_controller(prompt):
         tool_choice="auto",
     )
     logger.info(str(response.choices))
-    cache_key = prompt # TODO
+    cache_key = prompt
     cached_response = get_cached_response(cache_key)
     if cached_response:
         return json.loads(cached_response)
