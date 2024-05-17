@@ -3,8 +3,7 @@ import { Button } from "@mui/material";
 import { Link as RouterLink } from 'react-router-dom';
 import { getHistoryAsync } from "../features/chat/chatSlice";
 
-// @ts-ignore
-function NavigationBar({ dispatch }) {
+function NavigationBar({ dispatch}: any) {
     return (
         <nav>
             <Button component={RouterLink} to="/newtrip" style={{ marginRight: 20, color: 'white', border: '1px solid #cfcfcf' }}>

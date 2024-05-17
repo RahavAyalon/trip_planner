@@ -2,7 +2,6 @@ from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 import os
 
-# TODO remove first api... in all imports in the code
 from src.routes.api import api_router
 
 

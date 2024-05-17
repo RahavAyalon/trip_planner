@@ -12,7 +12,6 @@ export interface ChatMessage {
     message: string;
 }
 
-// New interface for the trip history
 export interface TripMessage {
     request: string;
     plan: string;
@@ -20,17 +19,15 @@ export interface TripMessage {
 
 export interface ChatState {
     chatHistory: ChatMessage[];
-    history: TripMessage[]; // Now using TripMessage for history
+    history: TripMessage[];
     sessionId: string;
-    debugInfo: any;
     status: "idle" | "loading" | "failed";
 }
 
 const initialState: ChatState = {
     chatHistory: [],
-    history: [], // Initialize the history array for TripMessage
+    history: [],
     sessionId: "",
-    debugInfo: {},
     status: "idle",
 };
 
@@ -46,7 +43,6 @@ export const getHistoryAsync = createAsyncThunk(
     "data/getHistory",
     async () => {
         const response = await getHistory();
-        // Make sure the API response structure matches what you need here
         return response.data;
     }
 );
@@ -65,9 +61,8 @@ export const chatSlice = createSlice({
     reducers: {
         reset: (state) => {
             state.chatHistory = [];
-            state.history = []; // Reset history as well
+            state.history = [];
             state.sessionId = "";
-            state.debugInfo = {};
             state.status = "idle";
         },
         addUserMessage: (state, action) => {
@@ -110,12 +105,10 @@ export const chatSlice = createSlice({
             })
             .addCase(resetChatAsync.fulfilled, (state) => {
                 state.chatHistory = [];
-                state.history = []; // Reset history on chat reset
-                state.debugInfo = {};
+                state.history = [];
                 state.status = "idle";
             })
             .addCase(getHistoryAsync.fulfilled, (state, action) => {
-                // Ensure the payload structure matches TripMessage
                 state.history = action.payload.map((item: any) => ({
                     request: item.request,
                     plan: item.plan
