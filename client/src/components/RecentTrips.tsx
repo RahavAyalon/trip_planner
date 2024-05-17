@@ -1,12 +1,15 @@
-import { Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper } from '@mui/material';
-import { useSelector } from 'react-redux';
 import React from 'react';
-
-import { ChatInteraction } from "../features/chat/chatSlice";
+import { useSelector } from 'react-redux';
+import { Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper } from '@mui/material';
 import { RootState } from '../core/store';
 
+interface TripMessage {
+    request: string;
+    plan: string;
+}
+
 function RecentTrips() {
-    const trips = useSelector((state: RootState) => state.data.history as ChatInteraction[]);
+    const trips = useSelector((state: RootState) => state.data.history as TripMessage[]);
     const tableStyle = {
         background: '#212121',
         borderRadius: '10px',
@@ -24,7 +27,7 @@ function RecentTrips() {
                     </TableRow>
                 </TableHead>
                 <TableBody>
-                    {trips.slice().reverse().map((trip, index) => (
+                    {trips.map((trip, index) => (
                         <TableRow key={index}>
                             <TableCell component="th" scope="row" sx={tableStyle}>
                                 {trip.request}
