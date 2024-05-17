@@ -19,7 +19,6 @@ async def plan_trip(prompt: Prompt):
 @router.get("/history", summary="Get 5 most recent trips", status_code=200)
 async def get_recent_trips():
     data = []
-    # todo should initialize json each time server starts/closes
     with open('chat_history.json', 'r') as file:
         data = json.load(file)
     return data
