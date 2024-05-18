@@ -21,7 +21,6 @@ export const getHistoryAsync = createAsyncThunk(
     }
 );
 
-// @ts-ignore
 export const chatSlice = createSlice({
     name: "data",
     initialState,

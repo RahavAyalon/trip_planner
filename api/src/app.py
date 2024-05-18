@@ -2,7 +2,7 @@ from fastapi.middleware.cors import CORSMiddleware
 from fastapi import FastAPI
 import os
 
-from routes.api import api_router
+from .routes.api import api_router
 
 
 origins = [

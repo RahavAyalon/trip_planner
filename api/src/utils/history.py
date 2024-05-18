@@ -11,7 +11,7 @@ def load_history(file_path):
 
 
 def save_history(file_path, history):
-    with open(file_path, 'w') as file:
+    with open(file_path, 'w+') as file:
         json.dump(history, file)
 
 
@@ -19,8 +19,8 @@ def update_history(prompt, response, file_path='chat_history.json'):
     history = load_history(file_path)
 
     new_interaction = {"request": prompt, "plan": response.choices[0].message.content}
-    history.append(new_interaction)
+    history.insert(__index=0, __object=new_interaction)
     if len(history) > 5:
-        history.pop(0)
+        history.pop()
 
     save_history(file_path, history)

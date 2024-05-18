@@ -24,7 +24,7 @@ function RecentTrips() {
                     </TableRow>
                 </TableHead>
                 <TableBody>
-                    {trips.slice().reverse().map((trip, index) => (
+                    {trips.map((trip, index) => (
                         <TableRow key={index}>
                             <TableCell component="th" scope="row" sx={tableStyle}>
                                 {trip.request}
