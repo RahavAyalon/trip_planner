@@ -1,7 +1,7 @@
 ## Trip Planner API ##
 
 The trip planner API, developed using Python's FastAPI, exposes two endpoints:
-1) POST /newtrip - gets a natural language trip planning request from the user, and responses with a
+1) POST api/trips - gets a natural language trip planning request from the user, and responses with a
    natural language trip planning suggestion, generated using OpenAI Models.
    - The API uses OpenAI function calling to validate all required fields are present in the user
      query (duration, budget, location). 
@@ -9,7 +9,7 @@ The trip planner API, developed using Python's FastAPI, exposes two endpoints:
      mainly in regard to hallucination and responses to unrelated topics.
    - The API utilizes LLM-guard to block any attempt for prompt injection.
    - The API uses Redis to cache user's valid requests along their responses.
-2) GET /recenttrips - returns the 5 last valid requests sent to the system alongside their responses.
+2) GET api/trips/history - returns the 5 last valid requests sent to the system alongside their responses.
    - Future improvements may include session management + User DB management (For example, using MongoDB),
      which will enable each user to view only its history.
 
@@ -139,5 +139,3 @@ Testing Trip Planner's backend involves various strategies and test cases to ens
    **Test Cases:**
    - **Load Handling:** Test how the system handles a large number of concurrent users or requests.
    - **Response Time:** Measure response times under different load conditions to ensure they meet acceptable thresholds.
-
-## Future Improvements ##

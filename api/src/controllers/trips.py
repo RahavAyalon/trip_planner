@@ -73,7 +73,7 @@ def plan_trip_controller(prompt):
 
     tool_calls = response.choices[0].message.tool_calls
     if not tool_calls:
-        return {"content": response.choices[0].message.content}  # Trip information is missing
+        return {"content": response.choices[0].message.content, "status_code": 400}  # Trip information is missing
 
     add_structured_query_to_messages(tool_calls[0], messages)
     enriched_response = send_query_to_ai(messages=messages)

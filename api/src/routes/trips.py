@@ -14,6 +14,8 @@ async def plan_trip(prompt: Prompt):
     res = plan_trip_controller(prompt.prompt)
     if res.get("status_code") == 403:
         raise HTTPException(403, res.get("error"))
+    if res.get("status_code") == 400:
+        raise HTTPException(400, res.get("content"))
     return res
 
 
