@@ -3,11 +3,7 @@
 }
 
 .App-section {
-<<<<<<< HEAD
-  background-color: #212121;
-=======
   background-color: black;
->>>>>>> 46957b05b47a484f6f48276bfdf6e83b9ed69578
   color: white;
   display: flex;
   align-items: center;
@@ -49,12 +45,7 @@
 }
 
 .MuiListItem-root.odd {
-<<<<<<< HEAD
-    background-color: #212121;
-=======
     background-color: black;
->>>>>>> 46957b05b47a484f6f48276bfdf6e83b9ed69578
-
 }
 
 
