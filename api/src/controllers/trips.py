@@ -1,14 +1,15 @@
-from ..utils.cache import get_cached_response, set_response_in_cache
-from ..utils.history import update_history
-from ..utils.validator import validate_prompt_input, validate_prompt_injection
-from ..utils.context import context
-from ..utils.tools import tools
-from ..utils.logger import logger
-
 from dotenv import load_dotenv
 import openai
 import json
 import os
+
+from ..utils.validator import validate_prompt_input, validate_prompt_injection
+from ..utils.cache import get_cached_response, set_response_in_cache
+from ..utils.history import update_history
+from ..utils.context import context
+from ..utils.logger import logger
+from ..utils.tools import tools
+
 
 load_dotenv()
 

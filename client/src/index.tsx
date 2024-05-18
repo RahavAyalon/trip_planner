@@ -1,12 +1,13 @@
-import React from 'react';
+import {ThemeProvider, createTheme} from "@mui/material/styles";
 import { createRoot } from 'react-dom/client';
 import { Provider } from 'react-redux';
+import { v4 as uuidv4 } from 'uuid';
+import React from 'react';
+
+import reportWebVitals from './reportWebVitals';
 import { store } from './core/store';
 import App from './App';
-import reportWebVitals from './reportWebVitals';
 import './index.css';
-import {ThemeProvider, createTheme} from "@mui/material/styles";
-import { v4 as uuidv4 } from 'uuid';
 
 const container = document.getElementById('root')!;
 const root = createRoot(container);

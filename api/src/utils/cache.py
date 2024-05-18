@@ -1,5 +1,6 @@
-import os
 import redis
+import os
+
 from .logger import logger
 
 redis_client = redis.StrictRedis(host=os.getenv("REDIS_HOST"), port=os.getenv("REDIS_PORT"),

@@ -1,5 +1,6 @@
-import NavigationBar from "./NavigationBar";
 import {useLocation} from "react-router-dom";
+
+import NavigationBar from "./NavigationBar";
 
 // @ts-ignore
 function Layout({ children, dispatch }) {

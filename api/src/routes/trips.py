@@ -1,10 +1,11 @@
-from fastapi import APIRouter
-from ..models.prompt import Prompt
-from ..controllers.trips import plan_trip_controller
+from fastapi import APIRouter, HTTPException
 import json
-from src.utils.logger import logger
+
+from ..controllers.trips import plan_trip_controller
+from ..models.prompt import Prompt
+from ..utils.logger import logger
+
 router = APIRouter(prefix="/trips", tags=["Trips"])
-from fastapi import HTTPException
 
 
 @router.post("", summary="Plan a trip", status_code=200)

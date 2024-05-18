@@ -1,4 +1,5 @@
 import { configureStore, ThunkAction, Action } from '@reduxjs/toolkit';
+
 import sequencesReducer from '../features/chat/chatSlice';
 
 export const store = configureStore({

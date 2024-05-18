@@ -2,8 +2,8 @@ from dotenv import load_dotenv
 import uvicorn
 import os
 
-from src.app import app
 from dotenv import load_dotenv
+from src.app import app
 
 
 if __name__ == "__main__":

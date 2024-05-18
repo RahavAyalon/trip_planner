@@ -1,5 +1,5 @@
-import connector from "../../api/connector";
 import {ChatRequest} from "../../types/global.types";
+import connector from "../../api/connector";
 
 export function sendMessage(chatRequest: ChatRequest) {
     return connector.post(
