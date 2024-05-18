@@ -3,7 +3,7 @@ tools = [
         "type": "function",
         "function": {
             "name": "extract_trip_info",
-            "description": "Get the trip information from the body of the input text",
+            "description": "Get the trip information from the body of the input text.",
             "parameters": {
                 "type": "object",
                 "properties": {
@@ -24,7 +24,7 @@ tools = [
                         "description": "The concept of the trip, e.g. romantic, friends, family",
                     },
                 },
-                "required": ["location", "budget", "duration"],
+                "required": [],
             },
         }
     }

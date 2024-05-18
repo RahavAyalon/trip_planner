@@ -20,7 +20,7 @@ function RecentTrips() {
                 <TableHead>
                     <TableRow>
                         <TableCell sx={tableStyle}><strong>Request</strong></TableCell>
-                        <TableCell align="left" sx={tableStyle}><strong>Plan</strong></TableCell>
+                            <TableCell align="left" sx={tableStyle}><strong>Response</strong></TableCell>
                     </TableRow>
                 </TableHead>
                 <TableBody>

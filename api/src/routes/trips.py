@@ -12,8 +12,8 @@ router = APIRouter(prefix="/trips", tags=["Trips"])
 async def plan_trip(prompt: Prompt):
     logger.info(prompt.prompt)
     res = plan_trip_controller(prompt.prompt)
-    if res.get("status_code") == 403:
-        raise HTTPException(403, res.get("error"))
+    if res.get("status_code") == 403 or res.get("status_code") == 503:
+        raise HTTPException(res.get("status_code"), res.get("error"))
     if res.get("status_code") == 400:
         raise HTTPException(400, res.get("content"))
     return res

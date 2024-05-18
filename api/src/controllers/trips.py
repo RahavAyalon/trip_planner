@@ -10,6 +10,10 @@ from ..utils.context import context
 from ..utils.logger import logger
 from ..utils.tools import tools
 
+PROMPT_INJECTION_RESPONSE = ("Your recent input has been flagged as an attempt to alter standard chatbot operations. "
+                             "Please be aware that continued misuse of the service can lead to restrictions on your "
+                             "access. We take the integrity and security of our services seriously. If you believe this"
+                             " is a mistake, please contact support.")
 
 load_dotenv()
 
@@ -35,26 +39,27 @@ def send_query_to_ai(messages, openai_tools=None, tool_choice=None):
 
 def add_structured_query_to_messages(tool_call, messages):
     function_args = json.loads(tool_call.function.arguments)
-    if validate_prompt_input(location=function_args.get("location"),
-                             budget=function_args.get("budget"),
-                             duration=function_args.get("duration")):
-        function_response = json.dumps({
+    messages.append({
+        "role": "function",
+        "tool_call_id": tool_call.id,
+        "name": tool_call.function.name,
+        "content": json.dumps({
             "location": function_args.get("location"),
             "budget": function_args.get("budget"),
             "duration": function_args.get("duration"),
             "concept": function_args.get("concept")
         })
-        messages.append({
-            "role": "function",
-            "tool_call_id": tool_call.id,
-            "name": tool_call.function.name,
-            "content": function_response
-        })
+    })
+    return 200 if validate_prompt_input(location=function_args.get("location"),
+                             budget=function_args.get("budget"),
+                             duration=function_args.get("duration")) else 400
 
 
 def plan_trip_controller(prompt):
     logger.info(prompt)
     if not validate_prompt_injection(prompt):
+        set_response_in_cache(prompt, json.dumps(PROMPT_INJECTION_RESPONSE))
+        update_history(prompt, PROMPT_INJECTION_RESPONSE)
         logger.warning("Prompt injection attempt detected for prompt: " + prompt)
         return {"error": "Prompt injection attempt detected", "status_code": 403}
 
@@ -66,16 +71,13 @@ def plan_trip_controller(prompt):
         {"role": "system", "content": context},
         {"role": "user", "content": prompt}
     ]
-    response = send_query_to_ai(messages=messages, openai_tools=tools, tool_choice="auto")
+    response = send_query_to_ai(messages=messages, openai_tools=tools, tool_choice={"type": "function", "function":
+        {"name": "extract_trip_info"}})
     if not response:
         return {"error": "OpenAI Service Unreachable", "status_code": 503}
     logger.info(str(response.choices))
 
-    tool_calls = response.choices[0].message.tool_calls
-    if not tool_calls:
-        return {"content": response.choices[0].message.content, "status_code": 400}  # Trip information is missing
-
-    add_structured_query_to_messages(tool_calls[0], messages)
+    status = add_structured_query_to_messages(response.choices[0].message.tool_calls[0], messages)
     enriched_response = send_query_to_ai(messages=messages)
     if not response:
         return {"error": "OpenAI Service Unreachable", "status_code": 503}
@@ -83,4 +85,4 @@ def plan_trip_controller(prompt):
     logger.info(str(enriched_response))
     set_response_in_cache(prompt, json.dumps(enriched_response.choices[0].message.model_dump()))
     update_history(prompt, enriched_response)
-    return enriched_response.choices[0].message.model_dump()
+    return {"content": enriched_response.choices[0].message.content, "status_code": status}

@@ -7,9 +7,19 @@ import { RootState } from "../../core/store";
 
 export const sendMessageAsync = createAsyncThunk(
     "data/sendMessage",
-    async (chatRequest: ChatRequest) => {
-        const response = await sendMessage(chatRequest);
-        return response.data;
+    async (chatRequest: ChatRequest, { rejectWithValue }) => {
+        try {
+            const response = await sendMessage(chatRequest);
+            return response.data;
+        } catch (error) {
+            // @ts-ignore
+            if (error.response && error.response.status === 400) {
+                // @ts-ignore
+                return rejectWithValue(error.response.data);
+            } else {
+                throw error;
+            }
+        }
     }
 );
 
@@ -40,20 +50,25 @@ export const chatSlice = createSlice({
     },
     extraReducers: (builder) => {
         builder
-            .addCase(sendMessageAsync.pending, (state) => {
+            .addCase(sendMessageAsync.pending, (state, action) => {
                 state.status = "loading";
             })
             .addCase(sendMessageAsync.rejected, (state, action) => {
                 state.status = "failed";
-                if (action.error.message?.includes('403')) {
+                if (action.payload) {
                     state.chatHistory.push({
-                    speaker: 'AI',
-                    message: "Your recent input has been flagged as an attempt to alter standard chatbot operations. " +
-                        "Please be aware that continued misuse of the service can lead to restrictions on your access. " +
-                        "We take the integrity and security of our services seriously. " +
-                        "If you believe this is a mistake, please contact support."
-                });
-            }
+                        speaker: 'AI',                     // @ts-ignore
+                        message: action.payload.detail
+                    });
+                } else if (action.error.message?.includes('403')) {
+                    state.chatHistory.push({
+                        speaker: 'AI',
+                        message: "Your recent input has been flagged as an attempt to alter standard chatbot operations. " +
+                            "Please be aware that continued misuse of the service can lead to restrictions on your access. " +
+                            "We take the integrity and security of our services seriously. " +
+                            "If you believe this is a mistake, please contact support."
+                    });
+                }
             })
             .addCase(sendMessageAsync.fulfilled, (state, action) => {
                 state.status = "idle";
