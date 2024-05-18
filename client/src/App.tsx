@@ -3,8 +3,8 @@ import React, {useEffect} from "react";
 import { v4 as uuidv4 } from 'uuid';
 
 import {getCookie, setCookie} from "./features/Cookies";
-import Background from "./components/Background";
 import RecentTrips from './components/RecentTrips';
+import Background from "./components/Background";
 import { useAppDispatch } from "./core/hooks";
 import NewTrip from './components/NewTrip';
 import Layout from './components/Layout';
