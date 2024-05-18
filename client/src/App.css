@@ -3,7 +3,7 @@
 }
 
 .App-section {
-  background-color: #212121;
+  background-color: black;
   color: white;
   display: flex;
   align-items: center;
@@ -45,7 +45,7 @@
 }
 
 .MuiListItem-root.odd {
-    background-color: #212121;
+    background-color: black;
 
 }
 
@@ -60,63 +60,54 @@
 }
 @-webkit-keyframes line{
     0%{
-
-        background-color: rgba(0,0,0, 1);
-        box-shadow: 12px 0px 0px 0px rgba(0,0,0,0.2),
-        24px 0px 0px 0px rgba(0,0,0,0.2);
-
+        background-color: rgba(0,128,0, 1); /* Green */
+        box-shadow: 12px 0px 0px 0px rgba(255,165,0,0.2), /* Orange */
+        24px 0px 0px 0px rgba(255,255,0,0.2); /* Yellow */
     }
     25%{
-        background-color: rgba(0,0,0, 0.4);
-        box-shadow: 12px 0px 0px 0px rgba(0,0,0,2),
-        24px 0px 0px 0px rgba(0,0,0,0.2);
-
+        background-color: rgba(0,128,0, 0.4); /* Green */
+        box-shadow: 12px 0px 0px 0px rgba(255,165,0,2), /* Orange */
+        24px 0px 0px 0px rgba(255,255,0,0.2); /* Yellow */
     }
-    75%{ background-color: rgba(0,0,0, 0.4);
-        box-shadow: 12px 0px 0px 0px rgba(0,0,0,0.2),
-        24px 0px 0px 0px rgba(0,0,0,2);
-
+    75%{
+        background-color: rgba(0,128,0, 0.4); /* Green */
+        box-shadow: 12px 0px 0px 0px rgba(255,165,0,0.2), /* Orange */
+        24px 0px 0px 0px rgba(255,255,0,2); /* Yellow */
     }
 }
 
 @-moz-keyframes line{
     0%{
-
-        background-color: rgba(0,0,0, 1);
-        box-shadow: 12px 0px 0px 0px rgba(0,0,0,0.2),
-        24px 0px 0px 0px rgba(0,0,0,0.2);
-
+        background-color: rgba(0,128,0, 1); /* Green */
+        box-shadow: 12px 0px 0px 0px rgba(255,165,0,0.2), /* Orange */
+        24px 0px 0px 0px rgba(255,255,0,0.2); /* Yellow */
     }
     25%{
-        background-color: rgba(0,0,0, 0.4);
-        box-shadow: 12px 0px 0px 0px rgba(0,0,0,2),
-        24px 0px 0px 0px rgba(0,0,0,0.2);
-
+        background-color: rgba(0,128,0, 0.4); /* Green */
+        box-shadow: 12px 0px 0px 0px rgba(255,165,0,2), /* Orange */
+        24px 0px 0px 0px rgba(255,255,0,0.2); /* Yellow */
     }
-    75%{ background-color: rgba(0,0,0, 0.4);
-        box-shadow: 12px 0px 0px 0px rgba(0,0,0,0.2),
-        24px 0px 0px 0px rgba(0,0,0,2);
-
+    75%{
+        background-color: rgba(0,128,0, 0.4); /* Green */
+        box-shadow: 12px 0px 0px 0px rgba(255,165,0,0.2), /* Orange */
+        24px 0px 0px 0px rgba(255,255,0,2); /* Yellow */
     }
 }
 
 @keyframes line{
     0%{
-
-        background-color: rgba(0,0,0, 1);
-        box-shadow: 12px 0px 0px 0px rgba(0,0,0,0.2),
-        24px 0px 0px 0px rgba(0,0,0,0.2);
-
+        background-color: rgba(0,128,0, 1); /* Green */
+        box-shadow: 12px 0px 0px 0px rgba(255,165,0,0.2), /* Orange */
+        24px 0px 0px 0px rgba(255,255,0,0.2); /* Yellow */
     }
     25%{
-        background-color: rgba(0,0,0, 0.4);
-        box-shadow: 12px 0px 0px 0px rgba(0,0,0,2),
-        24px 0px 0px 0px rgba(0,0,0,0.2);
-
+        background-color: rgba(0,128,0, 0.4); /* Green */
+        box-shadow: 12px 0px 0px 0px rgba(255,165,0,2), /* Orange */
+        24px 0px 0px 0px rgba(255,255,0,0.2); /* Yellow */
     }
-    75%{ background-color: rgba(0,0,0, 0.4);
-        box-shadow: 12px 0px 0px 0px rgba(0,0,0,0.2),
-        24px 0px 0px 0px rgba(0,0,0,2);
-
+    75%{
+        background-color: rgba(0,128,0, 0.4); /* Green */
+        box-shadow: 12px 0px 0px 0px rgba(255,165,0,0.2), /* Orange */
+        24px 0px 0px 0px rgba(255,255,0,2); /* Yellow */
     }
 }

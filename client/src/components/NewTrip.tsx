@@ -1,10 +1,11 @@
-import React from 'react';
+import RestartAltIcon from '@mui/icons-material/RestartAlt';
 import { Box, Stack, Button } from "@mui/material";
 import SendIcon from '@mui/icons-material/Send';
-import RestartAltIcon from '@mui/icons-material/RestartAlt';
+import React from 'react';
+
+import { addUserMessage, sendMessageAsync } from "../features/chat/chatSlice";
 import TextAreaElement from "./textarea";
 import ChatBox from './ChatBox';
-import { addUserMessage, sendMessageAsync } from "../features/chat/chatSlice";
 
 // @ts-ignore
 function NewTrip({ dispatch, session_id }) {
