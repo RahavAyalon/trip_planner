@@ -1,7 +1,8 @@
 import { Avatar, List, ListItem, ListItemAvatar, ListItemText, Stack } from "@mui/material";
-import { useAppSelector } from "../core/hooks";
-import { selectChat } from "../features/chat/chatSlice";
 import PersonIcon from '@mui/icons-material/Person';
+
+import { selectChat } from "../features/chat/chatSlice";
+import { useAppSelector } from "../core/hooks";
 
 const ChatBox = () => {
     const data = useAppSelector(selectChat);
@@ -9,7 +10,7 @@ const ChatBox = () => {
 
     return (
         <Stack sx={{
-            background: '#212121',
+            background: 'black',
             minHeight: '50vh',
             borderRadius: '10px',
             m: 2,
@@ -19,7 +20,7 @@ const ChatBox = () => {
             <List sx={{
                 width: '100%',
                 maxWidth: '100%',
-                bgcolor: '#212121',
+                bgcolor: 'black',
                 textAlign: 'left',
 
             }}>
@@ -33,7 +34,7 @@ const ChatBox = () => {
                             }} className={(index % 2 === 0) ? 'even' : 'odd'}>
                             <ListItemAvatar>
                                 {msg.speaker === 'AI' ?
-                                    <Avatar sx={{ bgcolor: '#212121' }}></Avatar> :
+                                    <Avatar sx={{ bgcolor: 'black' }}></Avatar> :
                                     <Avatar>
                                         <PersonIcon />
                                     </Avatar>

@@ -1,15 +1,24 @@
-import React from 'react';
-import { Button } from "@mui/material";
 import { Link as RouterLink } from 'react-router-dom';
+import { Button } from "@mui/material";
+import React from 'react';
+
 import { getHistoryAsync } from "../features/chat/chatSlice";
 
-function NavigationBar({ dispatch}: any) {
+// @ts-ignore
+function NavigationBar({ dispatch, style }) {
     return (
         <nav>
-            <Button component={RouterLink} to="/newtrip" style={{ marginRight: 20, color: 'white', border: '1px solid #cfcfcf' }}>
+            <Button
+                component={RouterLink}
+                to="/newtrip"
+                style={{ ...style, marginRight: 20, color: 'white', border: '1px solid #cfcfcf' }}
+            >
                 Chat
             </Button>
-            <Button component={RouterLink} to="/recenttrips" style={{ color: 'white', border: '1px solid #cfcfcf' }}
+            <Button
+                component={RouterLink}
+                to="/recenttrips"
+                style={{ ...style, color: 'white', border: '1px solid #cfcfcf' }}
                 onClick={() => dispatch(getHistoryAsync())}
             >
                 Recent Trips

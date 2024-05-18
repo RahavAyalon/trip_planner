@@ -1,5 +1,5 @@
 import connector from "../../api/connector";
-import {ChatRequest} from "./chatSlice";
+import {ChatRequest} from "../../types/global.types";
 
 export function sendMessage(chatRequest: ChatRequest) {
     return connector.post(
@@ -11,11 +11,5 @@ export function sendMessage(chatRequest: ChatRequest) {
 export function getHistory() {
     return connector.get(
         `${process.env.REACT_APP_BASE_URL}/api/trips/history`,
-    );
-}
-export function resetChat(session_id: string) {
-    return connector.post(
-        `${process.env.REACT_APP_BASE_URL}/api/trips/reset`,
-        {session_id: session_id}
     );
 }

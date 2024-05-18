@@ -1,17 +1,14 @@
-import React from 'react';
-import { useSelector } from 'react-redux';
 import { Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper } from '@mui/material';
-import { RootState } from '../core/store';
+import { useSelector } from 'react-redux';
+import React from 'react';
 
-interface TripMessage {
-    request: string;
-    plan: string;
-}
+import {TripMessage} from "../types/global.types";
+import { RootState } from '../core/store';
 
 function RecentTrips() {
     const trips = useSelector((state: RootState) => state.data.history as TripMessage[]);
     const tableStyle = {
-        background: '#212121',
+        background: 'black',
         borderRadius: '10px',
         color: 'white',
         border: '1px solid white'

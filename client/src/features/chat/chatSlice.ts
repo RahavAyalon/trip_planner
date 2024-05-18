@@ -1,35 +1,9 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import { getHistory, resetChat, sendMessage } from "./chatAPI";
+
+import {ChatRequest, initialState} from "../../types/global.types";
+import { getHistory, sendMessage } from "./chatAPI";
 import { RootState } from "../../core/store";
 
-export interface ChatRequest {
-    prompt: string;
-    session_id: string;
-}
-
-export interface ChatMessage {
-    speaker: string;
-    message: string;
-}
-
-export interface TripMessage {
-    request: string;
-    plan: string;
-}
-
-export interface ChatState {
-    chatHistory: ChatMessage[];
-    history: TripMessage[];
-    sessionId: string;
-    status: "idle" | "loading" | "failed";
-}
-
-const initialState: ChatState = {
-    chatHistory: [],
-    history: [],
-    sessionId: "",
-    status: "idle",
-};
 
 export const sendMessageAsync = createAsyncThunk(
     "data/sendMessage",
@@ -47,14 +21,7 @@ export const getHistoryAsync = createAsyncThunk(
     }
 );
 
-export const resetChatAsync = createAsyncThunk(
-    "data/resetChat",
-    async (session_id: string) => {
-        const response = await resetChat(session_id);
-        return response.data;
-    }
-);
-
+// @ts-ignore
 export const chatSlice = createSlice({
     name: "data",
     initialState,
@@ -96,17 +63,6 @@ export const chatSlice = createSlice({
                     speaker: 'AI',
                     message: content
                 });
-            })
-            .addCase(resetChatAsync.pending, (state) => {
-                state.status = "loading";
-            })
-            .addCase(resetChatAsync.rejected, (state) => {
-                state.status = "failed";
-            })
-            .addCase(resetChatAsync.fulfilled, (state) => {
-                state.chatHistory = [];
-                state.history = [];
-                state.status = "idle";
             })
             .addCase(getHistoryAsync.fulfilled, (state, action) => {
                 state.history = action.payload.map((item: any) => ({
