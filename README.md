@@ -17,8 +17,14 @@ The program consists of two microservices (Each one has a designated README.md):
 
 # Future Improvements
 
-- Session Management: will allow each user to view only its history using a designated DB (for example,
-  MongoDB) to store each user's data and metadata. (Initial implementation of cookies for auth exists)
-- Improved prompt injection detection: Some queries which include prompt injection are not detected by llm-guard,
-  or using Hugging Face models. 
-- Allow the user conversation with the bot rather than a one-shot message.
+- Session Management: Currently, all the users see a shared history of all the users. To enable each user to
+                      view only its data, session management can be implemented using cookies, together with
+                      the maintenance of a DB for users data and metadata. A suitable DB for this issue could
+                      be a scalable non-relational DB, like MongoDB.
+- Improved Prompt Injection Detection: Some queries which include prompt injection are not always detected by llm-guard,
+                      or using Hugging Face models. Further research in the topic is necessary for improving the detection.
+- Conversational Chat: As of today, the interaction of the bot and the user is "One-Shot" - the user sends a query and
+                       the bot responds. A more holistic solution will enable the user to have a conversation with the                        bot, enabling him to update or add new details. 
+- Logging: At the moment, logging is implemented using Python's logging (only in the backend). In the future, incorporating
+           a customized logger or a 3rd party logging service in the backend as well as the frontend could help increase
+           error detection.

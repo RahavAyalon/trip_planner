@@ -10,8 +10,6 @@ The trip planner API, developed using Python's FastAPI, exposes two endpoints:
    - The API utilizes LLM-guard to block any attempt for prompt injection.
    - The API uses Redis to cache user's valid requests along their responses.
 2) GET api/trips/history - returns the 5 last valid requests sent to the system alongside their responses.
-   - Future improvements may include session management + User DB management (For example, using MongoDB),
-     which will enable each user to view only its history.
 
 The API utilizes a designated logger for debugging and logging purposes.
 
@@ -60,6 +58,21 @@ The API utilizes a designated logger for debugging and logging purposes.
    ```bash
    python3 main.py
    ```
+   
+#### Manual Testing ####
+
+#### Design ####
+
+The design in the backend is quite straightforward as it only expose three routes only. Some interesting points, though:
+1) The current workflow of the /newtrip route goes as follows:
+   - Check input for prompt injection
+   - If input is valid, preform NER using OpenAI's function calling (1st call for OpenAI)
+   - In regard to old and new information, generate a suitable response (2nd call for OpenAI)
+1. Function Calling: There are various methods to extract and validate the required fields in the input (duration, length, budget),
+   the backend. After exploring different solutions, including `scipy` and `transformers` that were insufficient, the 
+   solution of OpenAI's function calling stood out in its simplicity and accuracy. 
+1. AI Model: The AI model I used for the implementation is the cheapest one that supports function calling: 
+   gpt-3.5-turbo-0125. 
 ### Test Design ###
 
 Testing Trip Planner's backend involves various strategies and test cases to ensure robustness and reliability
