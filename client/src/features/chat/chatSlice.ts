@@ -88,7 +88,6 @@ export const chatSlice = createSlice({
 });
 
 export const {
-    reset,
     addUserMessage
 } = chatSlice.actions;
 
