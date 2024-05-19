@@ -39,7 +39,7 @@ To manually test this code on your local machine:
 
 Testing Trip Planner's frontend involves various strategies and test cases to ensure robustness and reliability
 
-### 1. **Unit Testing**
+#### 1. **Unit Testing**
 
 **What Should be Tested:**
 - Background Component 
@@ -81,7 +81,7 @@ Testing Trip Planner's frontend involves various strategies and test cases to en
  - Test that the session ID cookie is set if not already present and that it is used correctly within the `NewTrip` component.
  - Confirm that the `Layout` component properly wraps around the routed components, and that headers and footers appear as expected based on the route.
 
-### 2. **Integration Testing**
+#### 2. **Integration Testing**
 **What Should be Tested:**
 - Component Interactions
  - Test the flow of data between components, ensuring that state changes in one component (like submitting a new trip request in `NewTrip`) correctly update the UI in others (like adding a new entry in `ChatBox` or `RecentTrips`).
@@ -98,6 +98,6 @@ Testing Trip Planner's frontend involves various strategies and test cases to en
 - Error Handling and Edge Cases
  - Test how the application handles network errors or invalid responses from the backend. Verify that error states are managed gracefully and communicated to the user effectively.
  - Test unusual or extreme cases, such as submitting empty forms, rapid sequential inputs, or invalid data formats, to ensure the application remains stable and user-friendly.
-### 3. **Performance and Security**
+#### 3. **Performance and Security**
 - Verify that the application handles expected and high loads gracefully, especially when dealing with data-intensive operations or when rendering large lists, like chat histories or trip logs.
 - Ensure that the application correctly implements security best practices, especially in handling user data and interactions with external systems.
