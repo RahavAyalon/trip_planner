@@ -58,7 +58,7 @@ The API utilizes a designated logger for debugging and logging purposes.
    ```bash
    python3 main.py
    ```
-#### Design ####
+### Design ###
 
 The design in the backend is quite straightforward as it exposes three routes only. Some interesting points, though:
 1) The current workflow of the /newtrip route goes as follows:
@@ -77,7 +77,7 @@ To manually test this code:
 1. Run the program, as explained in the previous section.
 2. Using some 3rd party requests service ike Curl or Postman, send requests to the routes to examine their responses.
 
-#### Test Design ####
+### Test Design ###
 
 Testing Trip Planner's backend involves various strategies and test cases to ensure robustness and reliability
 
