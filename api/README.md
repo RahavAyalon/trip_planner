@@ -58,8 +58,23 @@ The API utilizes a designated logger for debugging and logging purposes.
    ```bash
    python3 main.py
    ```
-   
+#### Automatic Testing ####
+
+A basic testing suite for Trip Planer can be found in the project. To run it:
+1. install dev requirements:
+```bash
+pip install -r dev-requirements.txt
+```
+2. Run:
+```bash
+pytest
+```
+
 #### Manual Testing ####
+
+To manually test this code:
+1. Run the program, as explained in the previous section.
+2. Using some 3rd party requests service ike Curl or Postman, send requests to the routes to examine their responses.
 
 #### Design ####
 
@@ -152,3 +167,4 @@ Testing Trip Planner's backend involves various strategies and test cases to ens
    **Test Cases:**
    - **Load Handling:** Test how the system handles a large number of concurrent users or requests.
    - **Response Time:** Measure response times under different load conditions to ensure they meet acceptable thresholds.
+
