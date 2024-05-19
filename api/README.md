@@ -58,17 +58,6 @@ The API utilizes a designated logger for debugging and logging purposes.
    ```bash
    python3 main.py
    ```
-#### Automatic Testing ####
-
-A basic testing suite for Trip Planer can be found in the project. To run it:
-1. install dev requirements:
-```bash
-pip install -r dev-requirements.txt
-```
-2. Run:
-```bash
-pytest
-```
 
 #### Manual Testing ####
 
@@ -78,7 +67,7 @@ To manually test this code:
 
 #### Design ####
 
-The design in the backend is quite straightforward as it only expose three routes only. Some interesting points, though:
+The design in the backend is quite straightforward as it exposes three routes only. Some interesting points, though:
 1) The current workflow of the /newtrip route goes as follows:
    - Check input for prompt injection
    - If input is valid, preform NER using OpenAI's function calling (1st call for OpenAI)
@@ -88,6 +77,7 @@ The design in the backend is quite straightforward as it only expose three route
    solution of OpenAI's function calling stood out in its simplicity and accuracy. 
 1. AI Model: The AI model I used for the implementation is the cheapest one that supports function calling: 
    gpt-3.5-turbo-0125. 
+
 ### Test Design ###
 
 Testing Trip Planner's backend involves various strategies and test cases to ensure robustness and reliability
@@ -110,20 +100,20 @@ Testing Trip Planner's backend involves various strategies and test cases to ens
    - plan_trip_controller():
      - If user's query is a prompt injection attempt
        - Should return a descriptive error message
-       - The user's query, along OpenAI's response shouldn't be saved in the history
-       - The user's query, along OpenAI's response shouldn't be cached
+       - The user's query, along OpenAI's response should be saved in the history
+       - The user's query, along OpenAI's response should be cached
      - User's query is on a different topic
        - Should return OpenAI's descriptive response for the user's query (he's not able to answer these type of questions)
-       - The user's query, along OpenAI's response shouldn't be saved in the history
-       - The user's query, along OpenAI's response shouldn't be cached
+       - The user's query, along OpenAI's response should be saved in the history
+       - The user's query, along OpenAI's response should be cached
      - User's query is missing some of the required input variables (e.g. destination, budget, duration):
        - Should return OpenAI's descriptive error message for the user's invalid query
-       - The user's query, along OpenAI's response shouldn't be saved in the history
-       - The user's query, along OpenAI's response shouldn't be cached
+       - The user's query, along OpenAI's response should be saved in the history
+       - The user's query, along OpenAI's response should be cached
      - User's query is containing invalid required input variables (e.g. destination, budget, duration) :
        - Should return OpenAI's generated response for the user's invalid query
-       - The user's query, along OpenAI's response shouldn't be saved in the history
-       - The user's query, along OpenAI's response shouldn't be cached
+       - The user's query, along OpenAI's response should be saved in the history
+       - The user's query, along OpenAI's response should be cached
      - User's query is containing valid required input variables (e.g. destination, budget, duration):
        - if query is cached:
          - The response should be extracted from the cache
@@ -134,34 +124,19 @@ Testing Trip Planner's backend involves various strategies and test cases to ens
          - The user's query, along OpenAI's response should be saved in the history
          - The user's query, along OpenAI's response should be cached
    - Ensure error Handling when external services are unreachable (Redis, OpenAI, llm-guard)
-   - /recenttrips:
-     - 5 most recent, valid trips are returned for each user
-     - Error handling when there's no connection to the DB
-   - **Input Validation:** Test each endpoint with valid and invalid inputs (e.g., invalid budget formats, non-existent destinations).
-   - **Error Handling:** Test how the system handles and returns errors when Redis is unreachable or if OpenAI service is down.
-   - **Output Correctness:** Verify that the API returns the correct response given a set of mocked inputs and conditions.
-    
+
 
 ### 2. **Integration/E2E Testing**
 - **Tools:** `pytest`, FastAPI's `TestClient`
-   - **Techniques:**
-     - **Mocking:** Mock external dependencies such as calls to OpenAI, Redis, or llm-guard. 
-
-   **Test Cases:**
+- **Test Cases:**
+   - /recenttrips:
+     - 5 most recent trips are returned properly
+     - Error handling when there's no connection to the DB
    - /newtrip:
+     - All cases from the previous part, make sure the correct status has been sent, too.
      
-
-### 3. **Functional Testing**
-   - **Objective:** Test the application as a whole, from an end-user perspective.
-   - **Tools:** `selenium`, `TestClient` from FastAPI.
-
-   **Test Cases:**
-   - **User Scenario Simulation:** Simulate real user scenarios to see how the system handles various combinations of inputs and conditions.
-   - **Session Management:** Ensure that user sessions are handled correctly, respecting login states and session data across requests.
-
 ### 4. **Performance Testing**
    - **Objective:** Ensure that the system performs well under expected and peak load conditions.
-   - **Tools:** `locust`, `jMeter`.
    - **Techniques:** Simulate multiple users or requests to test system scalability and responsiveness.
 
    **Test Cases:**
