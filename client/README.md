@@ -26,7 +26,7 @@ The trip planner Client, developed using React.js, Redux, and Material UI, expos
    ```bash
    npm start
    ```
-#### Manual Testing ####
+## Manual Testing ##
 
 To manually test this code on your local machine:
 1. Run the api (as explained in the api README.md)
