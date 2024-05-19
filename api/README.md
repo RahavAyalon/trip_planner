@@ -58,14 +58,7 @@ The API utilizes a designated logger for debugging and logging purposes.
    ```bash
    python3 main.py
    ```
-
-#### Manual Testing ####
-
-To manually test this code:
-1. Run the program, as explained in the previous section.
-2. Using some 3rd party requests service ike Curl or Postman, send requests to the routes to examine their responses.
-
-#### Design ####
+### Design ###
 
 The design in the backend is quite straightforward as it exposes three routes only. Some interesting points, though:
 1) The current workflow of the /newtrip route goes as follows:
@@ -78,11 +71,17 @@ The design in the backend is quite straightforward as it exposes three routes on
 1. AI Model: The AI model I used for the implementation is the cheapest one that supports function calling: 
    gpt-3.5-turbo-0125. 
 
+### Manual Testing ###
+
+To manually test this code:
+1. Run the program, as explained in the previous section.
+2. Using some 3rd party requests service ike Curl or Postman, send requests to the routes to examine their responses.
+
 ### Test Design ###
 
 Testing Trip Planner's backend involves various strategies and test cases to ensure robustness and reliability
 
-### 1. **Unit Testing**
+#### 1. **Unit Testing**
    - **Tools:** `pytest`
    - **Techniques:**
      - **Mocking:** Mock external dependencies such as calls to OpenAI, Redis or llm-guard.
@@ -126,7 +125,7 @@ Testing Trip Planner's backend involves various strategies and test cases to ens
    - Ensure error Handling when external services are unreachable (Redis, OpenAI, llm-guard)
 
 
-### 2. **Integration/E2E Testing**
+#### 2. **Integration/E2E Testing**
 - **Tools:** `pytest`, FastAPI's `TestClient`
 - **Test Cases:**
    - /recenttrips:
